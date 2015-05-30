@@ -40,9 +40,10 @@ function showAccelError() {
 
 alert ('error handler defined');
 
+var start = 0;
 
 function dsoundTick(timestamp) {
-  if (!start) {
+  if (start === 0) {
       start = timestamp;
       alert('starting loop');
     }
@@ -60,5 +61,9 @@ function dsoundTick(timestamp) {
 
 alert ('game loop defined');
 
-
-window.requestAnimationFrame(dsoundTick);
+try{
+    window.requestAnimationFrame(dsoundTick);
+} catch(e){
+    alert('reqanim not: ' + e.message);
+    
+}
