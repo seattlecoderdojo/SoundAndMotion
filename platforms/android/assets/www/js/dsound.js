@@ -22,17 +22,32 @@ var showy = document.querySelector("#showy");
 var showz = document.querySelector("#showz");
 var showt = document.querySelector("#showt");
 
-function onSuccess(acceleration) {
+function showAccel(acceleration) {
     showx.innerText = acceleration.x.toString();
     showy.innerText = acceleration.y.toString();
     showz.innerText = acceleration.z.toString();
     showt.innerText = acceleration.timestamp.toString();
 };
 
-function onError() {
+function showAccelError() {
     alert('onError!');
 };
 
-var options = { frequency: 100 };  // Update every .1 seconds
+function dsoundTick(timestamp) {
+  if (!start) {
+      start = timestamp;
+      alert('starting loop');
+    }
+  var progress = timestamp - start;
+  try {
+        navigator.accelerometer.getCurrentAcceleration(showAccel, showAccelError);
+      } catch(e) {
+        alert(e.message);  
+      }
 
-var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+  if (progress < 30000) {
+    window.requestAnimationFrame(dsoundTick);
+  }
+}
+
+window.requestAnimationFrame(dsoundTick);
