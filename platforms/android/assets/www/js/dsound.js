@@ -39,13 +39,13 @@ var start = 0;
 function dsoundTick(timestamp) {
   if (start === 0) {
       start = timestamp;
-      alert('starting loop');
     }
   var progress = timestamp - start;
   try {
         navigator.accelerometer.getCurrentAcceleration(showAccel, showAccelError);
       } catch(e) {
-        alert(e.message);  
+          //first time it'll fail
+          //but this way it doesn't kill the prog.
       }
 
   if (progress < 30000) {
@@ -56,6 +56,5 @@ function dsoundTick(timestamp) {
 try{
     window.requestAnimationFrame(dsoundTick);
 } catch(e){
-    alert('reqanim not: ' + e.message);
-    
+    alert('reqanimframe not working: ' + e.message);
 }
