@@ -22,6 +22,8 @@ var showy = document.querySelector("#showy");
 var showz = document.querySelector("#showz");
 var showt = document.querySelector("#showt");
 
+alert ('spans defined');
+
 function showAccel(acceleration) {
     showx.innerText = acceleration.x.toString();
     showy.innerText = acceleration.y.toString();
@@ -29,9 +31,15 @@ function showAccel(acceleration) {
     showt.innerText = acceleration.timestamp.toString();
 };
 
+alert ('show accel defined');
+
+
 function showAccelError() {
     alert('onError!');
 };
+
+alert ('error handler defined');
+
 
 function dsoundTick(timestamp) {
   if (!start) {
@@ -49,5 +57,8 @@ function dsoundTick(timestamp) {
     window.requestAnimationFrame(dsoundTick);
   }
 }
+
+alert ('game loop defined');
+
 
 window.requestAnimationFrame(dsoundTick);
